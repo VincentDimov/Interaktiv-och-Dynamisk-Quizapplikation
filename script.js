@@ -52,6 +52,7 @@ const quizzes = {
   ]
 };
 
+// Variabler för funktioner
 let currentQuiz = [];
 let currentIndex = 0;
 let score = 0;
