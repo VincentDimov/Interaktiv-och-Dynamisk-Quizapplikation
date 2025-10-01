@@ -65,7 +65,7 @@ let difficulty = "Medel";
 function showStart() {
   const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
   app.innerHTML = `
-    <h1>Välkommen till Quizen!</h1>
+    <h1>Välkommen till Quizen Regine!</h1>
     <p>Välj en kategori:</p>
     ${Object.keys(quizzes).map(cat => `<button onclick="chooseDifficulty('${cat}')">${cat}</button>`).join("")}
     <h3>Dina tidigare resultat:</h3>
