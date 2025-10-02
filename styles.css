@@ -47,8 +47,26 @@ button {
   transition: 0.3s;
 }
 
+#btn-easy {
+  background-color: #005fa3;
+}
+
+#btn-medium {
+  background-color: #0ba300;
+}
+
+#btn-hard {
+  background-color: #a30000;
+}
+
+#btn-easy:hover, #btn-medium:hover, #btn-hard:hover {
+  background: #e0e0e0;
+  color: black;
+}
+
 button:hover {
-  background: #005fa3;
+  background: #e0e0e0;
+  color: black;
 }
 
 .option {
@@ -64,6 +82,7 @@ button:hover {
 
 .option:hover {
   background: #e0e0e0;
+  color: black;
 }
 
 .timer {
@@ -71,12 +90,17 @@ button:hover {
   margin: 10px 0;
 }
 
+#time {
+  color: red;
+}
+
 .correct {
-  background: #c8f7c5 !important;
+  background: #47e13c !important;
+  color: black;
 }
 
 .wrong {
-  background: #f7c5c5 !important;
+  background: #e13c3c !important;
 }
 
 .history {
