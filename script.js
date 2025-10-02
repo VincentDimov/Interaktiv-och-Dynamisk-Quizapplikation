@@ -102,9 +102,9 @@ function chooseDifficulty(category) {
   currentCategory = category;
   app.innerHTML = `
     <h2>Välj svårighetsnivå för ${category}:</h2>
-    <button onclick="startQuiz('Lätt')">Lätt (15 sek)</button>
-    <button onclick="startQuiz('Medel')">Medel (10 sek)</button>
-    <button onclick="startQuiz('Svår')">Svår (5 sek)</button>
+    <button id="btn-easy" onclick="startQuiz('Lätt')">Lätt (15 sek)</button>
+    <button id="btn-medium" onclick="startQuiz('Medel')">Medel (10 sek)</button>
+    <button id="btn-hard" onclick="startQuiz('Svår')">Svår (5 sek)</button>
   `;
 }
 
@@ -188,7 +188,7 @@ function showResult() {
   answers.forEach(a => {
     html += `<li><strong>${a.question}</strong><br>Ditt svar: ${a.yourAnswer}<br>Rätt svar: ${a.correct}</li><br>`;
   });
-  html += `</ul><button onclick="showStart()">Tillbaka till start</button>`;
+  html += `</ul><button onclick="showQuiz()">Tillbaka till start</button>`;
   app.innerHTML = html;
 
   const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
