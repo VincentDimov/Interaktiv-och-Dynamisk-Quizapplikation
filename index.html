@@ -9,7 +9,32 @@
 
 </head>
 <body>
-    <h1>Interaktiv och Dynamisk Quizapplikation</h1>
-    
+    <main>
+        <h1>Interaktiv och Dynamisk Quizapplikation</h1>
+            <p>
+                Välkommen till vår interaktiva och dynamiska quizapplikation! 
+                Här kan du testa dina kunskaper inom Frontend-utveckling genom en rad spännande frågor. 
+                Applikationen är byggd med HTML, CSS och JavaScript för att ge dig en smidig och engagerande upplevelse. 
+                Det finns 3 olika ämnen att välja mellan: HTML, CSS och JavaScript. 
+                Varje ämne innehåller 5 frågor som du kan svara på. Efter att du har svarat på alla frågor kommer du att få din poängsumma och feedback på dina svar.
+            </p>
+            <div id="start-container">
+                <button id="start-button">Starta Quiz</button>
+            </div>
+            <div id="topic-container" style="display: none;">
+                <div id="topic-selection">
+                    <h2>Välj ett ämne:</h2>
+                    <button class="topic-button" data-topic="html">HTML</button>
+                    <button class="topic-button" data-topic="css">CSS</button>
+                    <button class="topic-button" data-topic="javascript">JavaScript</button>
+                </div>
+                <div id="result-container" style="display: none;">
+                    <h2>Dina resultat:</h2>
+                    <p id="hur-många-rätt-svar"></p>
+                    <div id="vilka-frågor-som-var-fel"></div>
+                    <button id="startaOm-Knapp">Starta om Quiz</button>
+                </div>
+            <div>
+    </main>
 </body>
 </html>
