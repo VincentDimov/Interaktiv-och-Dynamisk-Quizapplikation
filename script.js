@@ -67,6 +67,7 @@ let difficulty = "Medel";
 
 // Startvy
 function showStart() {
+  start.style.display = "block";
   app.style.display = "none";
   result.style.display = "result";
   start.innerHTML = `
