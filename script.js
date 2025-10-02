@@ -1,4 +1,3 @@
-const titleH1 = document.getElementById("titleH1");
 const start = document.getElementById("start");
 const app = document.getElementById("app");
 const result = document.getElementById("result");
@@ -7,15 +6,15 @@ const result = document.getElementById("result");
 const quizzes = {
   "HTML": [
     { question: "Vad står HTML för?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Madeup"], answer: "Hyper Text Markup Language" },
-    { question: "Vilken tag används för rubriker?", options: ["<p>", "<h1>", "<head>"], answer: "<h1>" },
-    { question: "Vilken tag används för en länk?", options: ["<a>", "<link>", "<url>"], answer: "<a>" },
-    { question: "Vilken tag används för bilder?", options: ["<img>", "<picture>", "<src>"], answer: "<img>" },
-    { question: "Vilken tag används för stycken?", options: ["<section>", "<p>", "<text>"], answer: "<p>" },
-    { question: "Hur skriver man en kommentar i HTML?", options: ["// kommentar", "<!-- kommentar -->", "# kommentar"], answer: "<!-- kommentar -->" },
+    { question: "Vilken tag används för rubriker?", options: ["&lt;p&gt;", "&lt;h1&gt;", "&lt;head&gt;"], answer: "&lt;h1&gt;" },
+    { question: "Vilken tag används för en länk?", options: ["&lt;a&gt;", "&lt;link&gt;", "&lt;url&gt;"], answer: "&lt;a&gt;" },
+    { question: "Vilken tag används för bilder?", options: ["&lt;img&gt;", "&lt;picture&gt;", "&lt;src&gt;"], answer: "&lt;img&gt;" },
+    { question: "Vilken tag används för stycken?", options: ["&lt;section&gt;", "&lt;p&gt;", "&lt;text&gt;"], answer: "&lt;p&gt;" },
+    { question: "Hur skriver man en kommentar i HTML?", options: ["// kommentar", "&lt;!-- kommentar --&gt;", "# kommentar"], answer: "&lt;!-- kommentar --&gt;" },
     { question: "Vilken attribut används för att öppna länk i ny flik?", options: ["target='_blank'", "newTab='true'", "open='new'"], answer: "target='_blank'" },
     { question: "Vilken attribut används för att visa alternativtext för en bild?", options: ["alt", "title", "description"], answer: "alt" },
-    { question: "Vilken HTML5-tag används för navigering?", options: ["<nav>", "<menu>", "<dir>"], answer: "<nav>" },
-    { question: "Vilken är den översta nivån på rubriker?", options: ["<h1>", "<h6>", "<head>"], answer: "<h1>" }
+    { question: "Vilken HTML5-tag används för navigering?", options: ["&lt;nav&gt;", "&lt;menu&gt;", "&lt;dir&gt;"], answer: "&lt;nav&gt;" },
+    { question: "Vilken är den översta nivån på rubriker?", options: ["&lt;h1&gt;", "&lt;h6&gt;", "&lt;head&gt;"], answer: "&lt;h1&gt;" }
   ],
   "CSS": [
     { question: "Vad står CSS för?", options: ["Cascading Style Sheets", "Creative Style System", "Colorful Style Syntax"], answer: "Cascading Style Sheets" },
@@ -139,7 +138,7 @@ function showQuestion() {
   const optionsDiv = document.getElementById("options");
   q.options.forEach(opt => {
     const btn = document.createElement("div");
-    btn.textContent = opt;
+    btn.innerHTML = opt;
     btn.classList.add("option");
     btn.onclick = () => selectAnswer(opt, btn);
     optionsDiv.appendChild(btn);
@@ -165,8 +164,8 @@ function selectAnswer(option, element) {
   answers.push({ question: q.question, correct: q.answer, yourAnswer: option || "Inget svar" });
 
   document.querySelectorAll(".option").forEach(btn => {
-    if (btn.textContent === q.answer) btn.classList.add("correct");
-    if (btn.textContent === option && option !== q.answer) btn.classList.add("wrong");
+    if (btn.innerHTML === q.answer) btn.classList.add("correct");
+    if (btn.innerHTML === option && option !== q.answer) btn.classList.add("wrong");
     btn.onclick = null;
   });
 
