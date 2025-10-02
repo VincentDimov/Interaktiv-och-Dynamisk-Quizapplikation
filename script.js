@@ -72,10 +72,10 @@ function showStart() {
   result.style.display = "result";
   start.innerHTML = `
     <h1>Välkommen till vår Frontend Quiz!</h1>
-    <p>                Välkommen till vår interaktiva och dynamiska quizapplikation! 
-                Här kan du testa dina kunskaper inom Frontend-utveckling genom en rad spännande frågor. 
-                Applikationen är byggd med HTML, CSS och JavaScript för att ge dig en smidig och engagerande upplevelse. 
-                Det finns 3 olika ämnen att välja mellan: HTML, CSS och JavaScript. 
+    <p>          
+                Här kan du testa dina kunskaper inom Frontend-utveckling genom en rad spännande frågor.</br> 
+                Applikationen är byggd med HTML, CSS och JavaScript för att ge dig en smidig och engagerande upplevelse. </br>
+                Det finns 3 olika ämnen att välja mellan: HTML, CSS och JavaScript. </br>
                 Varje ämne innehåller 5 frågor som du kan svara på. Efter att du har svarat på alla frågor kommer du att få din poängsumma och feedback på dina svar.</p>
     <button onclick="showQuiz()">Starta</button>
      `;

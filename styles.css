@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "SUSE Mono", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   text-shadow: black 1px 1px;
   color: white;
   background: #f0f4f8;
@@ -16,11 +20,14 @@ body {
 #start {
   text-align: center;
   margin: auto;
-  width: 70%;
+  width: 85%;
 }
 
 #app {
-  background: #f6b356;
+  background: linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
+   url("bg-quiz.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   color: white;
   padding: 20px;
   border-radius: 12px;
@@ -38,11 +45,12 @@ h2 {
 }
 
 button {
+  font-family: "SUSE Mono", sans-serif;
   padding: 10px 20px;
   margin: 10px;
   border: none;
   border-radius: 8px;
-  background: #ff6b31;
+  background: #3149ff;
   color: white;
   cursor: pointer;
   transition: 0.3s;
@@ -60,7 +68,9 @@ button {
   background-color: #a30000;
 }
 
-#btn-easy:hover, #btn-medium:hover, #btn-hard:hover {
+#btn-easy:hover,
+#btn-medium:hover,
+#btn-hard:hover {
   background: #e0e0e0;
   color: black;
 }
@@ -74,7 +84,7 @@ button:hover {
   display: block;
   margin: 8px 0;
   padding: 10px;
-  background: #ff6b31;
+  background: #3149ff;
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -114,7 +124,7 @@ ul {
 }
 
 .history li {
-  background: #ff6b31;
+  background: #3149ff;
   margin: 5px 0;
   padding: 8px;
   border-radius: 6px;
