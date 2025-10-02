@@ -1,4 +1,7 @@
+const titleH1 = document.getElementById("titleH1");
+const start = document.getElementById("start");
 const app = document.getElementById("app");
+const result = document.getElementById("result");
 
 // Quizdata
 const quizzes = {
@@ -64,9 +67,26 @@ let difficulty = "Medel";
 
 // Startvy
 function showStart() {
+  app.style.display = "none";
+  result.style.display = "result";
+  start.innerHTML = `
+    <h1>Välkommen till vår Frontend Quiz!</h1>
+    <p>                Välkommen till vår interaktiva och dynamiska quizapplikation! 
+                Här kan du testa dina kunskaper inom Frontend-utveckling genom en rad spännande frågor. 
+                Applikationen är byggd med HTML, CSS och JavaScript för att ge dig en smidig och engagerande upplevelse. 
+                Det finns 3 olika ämnen att välja mellan: HTML, CSS och JavaScript. 
+                Varje ämne innehåller 5 frågor som du kan svara på. Efter att du har svarat på alla frågor kommer du att få din poängsumma och feedback på dina svar.</p>
+    <button onclick="showQuiz()">Starta</button>
+     `;
+}
+
+// Quizvy
+function showQuiz() {
+  start.style.display = "none";
+  app.style.display = "block";
   const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
   app.innerHTML = `
-    <h1>Välkommen till Quizen!</h1>
+    <h1>Frontend Quiz</h1>
     <p>Välj en kategori:</p>
     ${Object.keys(quizzes).map(cat => `<button onclick="chooseDifficulty('${cat}')">${cat}</button>`).join("")}
     <h3>Dina tidigare resultat:</h3>

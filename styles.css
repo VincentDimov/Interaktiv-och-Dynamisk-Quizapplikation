@@ -1,18 +1,29 @@
 body {
   font-family: Arial, sans-serif;
+  color: white;
   background: #f0f4f8;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  background-image: url("bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#start {
+  text-align: center;
+  margin: auto;
+  width: 70%;
 }
 
 #app {
-  background: #fff;
+  background: #f6b356;
+  color: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   max-width: 600px;
   width: 100%;
   text-align: center;
@@ -20,8 +31,9 @@ body {
   max-height: 95vh;
 }
 
-h1, h2 {
-  color: #333;
+h1,
+h2 {
+  color: white;
 }
 
 button {
@@ -29,7 +41,7 @@ button {
   margin: 10px;
   border: none;
   border-radius: 8px;
-  background: #0077cc;
+  background: #ff6b31;
   color: white;
   cursor: pointer;
   transition: 0.3s;
@@ -43,7 +55,8 @@ button:hover {
   display: block;
   margin: 8px 0;
   padding: 10px;
-  background: #f9f9f9;
+  background: #ff6b31;
+  color: white;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
@@ -71,8 +84,12 @@ button:hover {
   margin-top: 20px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .history li {
-  background: #f4f4f4;
+  background: #ff6b31;
   margin: 5px 0;
   padding: 8px;
   border-radius: 6px;
