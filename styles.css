@@ -1,5 +1,6 @@
 body {
   font-family: Arial, sans-serif;
+  text-shadow: black 1px 1px;
   color: white;
   background: #f0f4f8;
   display: flex;
