@@ -39,13 +39,15 @@ body {
   max-height: 95vh;
 }
 
-h1,
-h2 {
-  color: white;
+#startText {
+  -webkit-text-stroke: 10px black; /* width and color */
+
+    paint-order: stroke fill;
 }
 
 button {
   font-family: "SUSE Mono", sans-serif;
+  text-align: center;
   padding: 10px 20px;
   margin: 10px;
   border: none;
@@ -56,12 +58,28 @@ button {
   transition: 0.3s;
 }
 
+.category-btn.html {
+  background-color: #f16529; /* HTML orange */
+}
+
+.category-btn.css {
+  background-color: #30f129; /* CSS blå */
+}
+
+.category-btn.javascript {
+  background-color: #f7ab1e; /* JS gul */
+}
+
+.category-btn.vs_code {
+  background-color: #f7ab1e; /* JS gul */
+}
+
 #btn-easy {
-  background-color: #005fa3;
+  background-color: #0ba300;
 }
 
 #btn-medium {
-  background-color: #0ba300;
+  background-color: #005fa3;
 }
 
 #btn-hard {
@@ -78,6 +96,20 @@ button {
 button:hover {
   background: #e0e0e0;
   color: black;
+}
+
+#resetHistoryButton {
+background-color: #a30000;
+}
+
+#resetHistoryButton:hover {
+  background: #e0e0e0;
+  color: black;
+}
+
+.next-btn {
+  font-weight: 700;
+  background-color: #ffa704;
 }
 
 .option {
@@ -115,17 +147,16 @@ button:hover {
 }
 
 .history {
-  text-align: left;
+  padding: 0;
+  justify-content: center;
+  text-align: center;
   margin-top: 20px;
 }
 
-ul {
-  list-style-type: none;
-}
-
 .history li {
-  background: #3149ff;
+  background: rgb(215, 153, 215);
   margin: 5px 0;
   padding: 8px;
   border-radius: 6px;
+  list-style-type: none;
 }

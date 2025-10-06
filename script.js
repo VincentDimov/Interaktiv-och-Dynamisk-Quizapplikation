@@ -29,9 +29,9 @@ const quizzes = {
     { question: "Vilken enhet används ofta för procentbaserad storlek?", options: ["%", "px", "em"], answer: "%" }
   ],
   "JavaScript": [
-    { question: "Vad står JS för?", options: ["Java Source", "JavaScript", "Just Script"], answer: "JavaScript" },
+    { question: "Vad står JS för?", options: ["JavaSource", "JavaScript", "JustScript"], answer: "JavaScript" },
     { question: "Vilket kommando skriver ut till konsolen?", options: ["print()", "console.log()", "log.print()"], answer: "console.log()" },
-    { question: "Vilken symbol används för kommentarer på en rad?", options: ["//", "<!--", "#"], answer: "//" },
+    { question: "Vilken symbol används för kommentarer på en rad?", options: ["//", "&lt;!--", "#"], answer: "//" },
     { question: "Vilken datatype används för text?", options: ["String", "Text", "Char"], answer: "String" },
     { question: "Vilken datatype används för sant/falskt?", options: ["Number", "Boolean", "TrueFalse"], answer: "Boolean" },
     { question: "Vilken operator används för addition?", options: ["+", "-", "*"], answer: "+" },
@@ -54,6 +54,7 @@ const quizzes = {
   ]
 };
 
+
 // Variabler för funktioner
 let currentQuiz = [];
 let currentIndex = 0;
@@ -70,8 +71,8 @@ function showStart() {
   app.style.display = "none";
   result.style.display = "result";
   start.innerHTML = `
-    <h1>Välkommen till vår Frontend Quiz!</h1>
-    <p>          
+    <h1 id="startText">Välkommen till vår Frontend Quiz!</h1>
+    <p id="startText">          
                 Här kan du testa dina kunskaper inom Frontend-utveckling genom en rad spännande frågor.</br> 
                 Applikationen är byggd med HTML, CSS och JavaScript för att ge dig en smidig och engagerande upplevelse. </br>
                 Det finns 3 olika ämnen att välja mellan: HTML, CSS och JavaScript. </br>
@@ -88,12 +89,12 @@ function showQuiz() {
   app.innerHTML = `
     <h1>Frontend Quiz</h1>
     <p>Välj en kategori:</p>
-    ${Object.keys(quizzes).map(cat => `<button onclick="chooseDifficulty('${cat}')">${cat}</button>`).join("")}
+    ${Object.keys(quizzes).map(cat => `<button class="category-btn ${cat.toLowerCase()}" onclick="chooseDifficulty('${cat}')">${cat}</button>`).join("")}
     <h3>Dina tidigare resultat:</h3>
     <ul class="history">
       ${history.length > 0 ? history.map(r => `<li>${r.date} - ${r.category} (${r.difficulty}): ${r.score}</li>`).join("") : "<li>Inga sparade resultat</li>"}
     </ul>
-    ${history.length > 0 ? `<button onclick="resetHistory()">Radera historik</button>` : ""}
+    ${history.length > 0 ? `<button id="resetHistoryButton" onclick="resetHistory()">Radera historik</button>` : ""}
   `;
 }
 
@@ -124,17 +125,19 @@ function showQuestion() {
   const q = currentQuiz[currentIndex];
   if (!q) return;
 
+  // Sätt tid beroende på svårighetsnivå
   if (difficulty === "Lätt") timeLeft = 15;
   if (difficulty === "Medel") timeLeft = 10;
   if (difficulty === "Svår") timeLeft = 5;
 
   app.innerHTML = `
-    <h2>${currentCategory} (${difficulty}) - Fråga ${currentIndex + 1} av ${currentQuiz.length}</h2>
+    <h5>${currentCategory} (${difficulty}) - Fråga ${currentIndex + 1} av ${currentQuiz.length}</h5>
     <p>${q.question}</p>
     <div class="timer">Tid kvar: <span id="time">${timeLeft}</span> sek</div>
     <div id="options"></div>
   `;
 
+  // Skapa svarsalternativ
   const optionsDiv = document.getElementById("options");
   q.options.forEach(opt => {
     const btn = document.createElement("div");
@@ -144,50 +147,101 @@ function showQuestion() {
     optionsDiv.appendChild(btn);
   });
 
+  // "Nästa fråga"-knapp (Döljs när man svarar eller trycker på den)
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Nästa fråga";
+  nextBtn.classList.add("next-btn");
+  nextBtn.onclick = () => {
+    nextBtn.style.display = "none"; // Dölj knappen direkt
+    // Om användaren inte svarat ännu → registrera "Inget svar" och visa rätt svar
+    if (!answers[currentIndex]) {
+      selectAnswer(null, null, true); // tredje argument = klick från "Next"
+    }
+  };
+  app.appendChild(nextBtn);
+
+  // Starta timer
   timer = setInterval(() => {
     timeLeft--;
     document.getElementById("time").textContent = timeLeft;
     if (timeLeft <= 0) {
       clearInterval(timer);
-      selectAnswer(null, null);
+      nextBtn.style.display = "none"; // Dölj knappen om tiden tar slut
+      selectAnswer(null, null, true);
     }
   }, 1000);
 }
 
-// Välj svar
-function selectAnswer(option, element) {
+function selectAnswer(option, element, fromNext = false) {
   clearInterval(timer);
 
   const q = currentQuiz[currentIndex];
+
+  // Dölj "Next"-knappen direkt när ett svar väljs
+  const nextBtn = document.querySelector(".next-btn");
+  if (nextBtn) nextBtn.style.display = "none";
+
+  // Undvik dubbla registreringar
+  if (answers[currentIndex]) return;
+
+  // Räkna poäng
   if (option === q.answer) score++;
 
-  answers.push({ question: q.question, correct: q.answer, yourAnswer: option || "Inget svar" });
+  // Spara svaret (eller "Inget svar")
+  answers[currentIndex] = {
+    question: q.question,
+    correct: q.answer,
+    yourAnswer: option || "Inget svar"
+  };
 
+  // Färgmarkera alternativen
   document.querySelectorAll(".option").forEach(btn => {
     if (btn.innerHTML === q.answer) btn.classList.add("correct");
     if (btn.innerHTML === option && option !== q.answer) btn.classList.add("wrong");
     btn.onclick = null;
   });
 
-  const nextBtn = document.createElement("button");
-  nextBtn.textContent = "Nästa fråga";
-  nextBtn.onclick = () => {
-    currentIndex++;
-    if (currentIndex < currentQuiz.length) showQuestion();
-    else showResult();
-  };
-  app.appendChild(nextBtn);
+  // Om svaret kom från "Nästa fråga"-knappen (dvs. inget svar):
+  // visa rätt svar och gå vidare automatiskt
+  if (fromNext) {
+    setTimeout(() => {
+      currentIndex++;
+      if (currentIndex < currentQuiz.length) showQuestion();
+      else showResult();
+    }, 1000); // liten paus så användaren ser rätt svar
+  }
+
+  // 🔹 Om användaren klickade på ett svar → gå vidare efter kort paus
+  if (option) {
+    setTimeout(() => {
+      currentIndex++;
+      if (currentIndex < currentQuiz.length) showQuestion();
+      else showResult();
+    }, 1000);
+  }
 }
 
 // Visa resultat
 function showResult() {
-  let html = `<h1>Resultat</h1>
-    <p>Du fick ${score} av ${currentQuiz.length} rätt!</p>
+  let html = `<h1 style="color: #3149ff;">Resultat</h1>
+    <p>Du fick <strong>${score}</strong> av <strong>${currentQuiz.length}</strong> rätt!</p>
     <h2>Rätta svar:</h2><ul style="text-align:left;">`;
 
   answers.forEach(a => {
-    html += `<li><strong>${a.question}</strong><br>Ditt svar: ${a.yourAnswer}<br>Rätt svar: ${a.correct}</li><br>`;
-  });
+  const isCorrect = a.yourAnswer === a.correct;
+  const color = isCorrect ? "green" : "red";
+  html += `
+    <li>
+      <strong>${a.question}</strong><br>
+      <span style="color: ${color};">
+        Ditt svar: ${a.yourAnswer}
+      </span><br>
+      <span style="color: green;">
+        Rätt svar: ${a.correct}
+      </span>
+    </li><br>
+  `;
+});
   html += `</ul><button onclick="showQuiz()">Tillbaka till start</button>`;
   app.innerHTML = html;
 
