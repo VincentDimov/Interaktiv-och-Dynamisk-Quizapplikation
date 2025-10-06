@@ -1,18 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: 400;
+  font-style: normal;
+  text-shadow: black 1px 1px;
+  color: white;
   background: #f0f4f8;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  background-image: url("bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#start {
+  text-align: center;
+  margin: auto;
+  width: 85%;
 }
 
 #app {
-  background: #fff;
+  background: linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
+   url("bg-quiz.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   max-width: 600px;
   width: 100%;
   text-align: center;
@@ -20,30 +39,81 @@ body {
   max-height: 95vh;
 }
 
-h1, h2 {
-  color: #333;
+#startText {
+  -webkit-text-stroke: 10px black; /* width and color */
+
+    paint-order: stroke fill;
 }
 
 button {
+  font-family: "SUSE Mono", sans-serif;
+  text-align: center;
   padding: 10px 20px;
   margin: 10px;
   border: none;
   border-radius: 8px;
-  background: #0077cc;
+  background: #3149ff;
   color: white;
   cursor: pointer;
   transition: 0.3s;
 }
 
+.category-btn.html {
+  background-color: #f16529; /* HTML orange */
+}
+
+.category-btn.css {
+  background-color: #30f129; /* CSS grön */
+}
+
+.category-btn.javascript {
+  background-color: #f7ab1e; /* JS gul */
+}
+
+#btn-easy {
+  background-color: #0ba300;
+}
+
+#btn-medium {
+  background-color: #005fa3;
+}
+
+#btn-hard {
+  background-color: #a30000;
+}
+
+#btn-easy:hover,
+#btn-medium:hover,
+#btn-hard:hover {
+  background: #e0e0e0;
+  color: black;
+}
+
 button:hover {
-  background: #005fa3;
+  background: #e0e0e0;
+  color: black;
+}
+
+#resetHistoryButton {
+background-color: #a30000;
+}
+
+#resetHistoryButton:hover {
+  background: #e0e0e0;
+  color: black;
+}
+
+.next-btn {
+  font-weight: 700;
+  background-color: #ffa704;
 }
 
 .option {
   display: block;
   margin: 8px 0;
   padding: 10px;
-  background: #f9f9f9;
+  background: #3149ff;
+  color: white;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
@@ -51,6 +121,7 @@ button:hover {
 
 .option:hover {
   background: #e0e0e0;
+  color: black;
 }
 
 .timer {
@@ -58,22 +129,30 @@ button:hover {
   margin: 10px 0;
 }
 
+#time {
+  color: red;
+}
+
 .correct {
-  background: #c8f7c5 !important;
+  background: #47e13c !important;
+  color: black;
 }
 
 .wrong {
-  background: #f7c5c5 !important;
+  background: #e13c3c !important;
 }
 
 .history {
-  text-align: left;
+  padding: 0;
+  justify-content: center;
+  text-align: center;
   margin-top: 20px;
 }
 
 .history li {
-  background: #f4f4f4;
+  background: rgb(215, 153, 215);
   margin: 5px 0;
   padding: 8px;
   border-radius: 6px;
+  list-style-type: none;
 }
