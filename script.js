@@ -85,7 +85,7 @@ function showStart() {
 function showQuiz() {
   start.style.display = "none";
   app.style.display = "block";
-  const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
+  const history = JSON.parse(localStorage.getItem("quizHistory")) || []; //LokalStorage
   app.innerHTML = `
     <h1>Frontend Quiz</h1>
     <p>Välj en kategori:</p>

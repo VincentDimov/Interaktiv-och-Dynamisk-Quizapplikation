@@ -58,6 +58,7 @@ button {
   transition: 0.3s;
 }
 
+/* Kategori knapp styles */
 .category-btn.html {
   background-color: #f16529; /* HTML orange */
 }
