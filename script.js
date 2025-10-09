@@ -3,7 +3,7 @@ const start = document.getElementById("start");
 const app = document.getElementById("app");
 const result = document.getElementById("result");
 
-// Quizdata organiserad i kategori
+// Quiz Arrays organiserade i kategori
 const quizzes = {
   "HTML": [
     { question: "Vad står HTML för?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Madeup"], answer: "Hyper Text Markup Language" },
@@ -178,7 +178,7 @@ function showQuestion() {
 
 // Funktion som hanterar användarens svar
 function selectAnswer(option, element, fromNext = false) {
-  clearInterval(timer); // Stoppa timern
+  clearInterval(timer); // Nollställa timern
 
   const q = currentQuiz[currentIndex];
 
@@ -216,7 +216,7 @@ function selectAnswer(option, element, fromNext = false) {
     }, 1000); // liten paus så användaren ser rätt svar
   }
 
-  // 🔹 Om användaren klickade på ett svar → gå vidare efter kort paus
+  // Om användaren klickade på ett svar → gå vidare efter kort paus
   if (option) {
     setTimeout(() => {
       currentIndex++;
@@ -258,10 +258,10 @@ function showResult() {
 // Funktion för att radera historik
 function resetHistory() {
   localStorage.removeItem("quizHistory");
-  showStart(); // Visa startsidan igen efter rensning
+  showStart(); // Visa startsidan igen efter rensad historik
 }
 
-// Blanda array slumpmässigt
+// Blanda arrays slumpmässigt
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1)); // Välj en slumpmässig index
