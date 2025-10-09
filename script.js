@@ -85,17 +85,9 @@ function showStart() {
 
 // Funktion som visar quizens kategori-val
 function showQuiz() {
-<<<<<<< HEAD
-  start.style.display = "none"; // Dölj startsidan
-  app.style.display = "block"; // Visa quizdelen
-  // Hämta tidigare resultat från localStorage
-  const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
-  // Visa kategori-knappar och tidigare resultat
-=======
   start.style.display = "none";
   app.style.display = "block";
   const history = JSON.parse(localStorage.getItem("quizHistory")) || []; //LokalStorage
->>>>>>> 19af0b689afa7708e01eea728127877337de8b88
   app.innerHTML = `
     <h1>Frontend Quiz</h1>
     <p>Välj en kategori:</p>
