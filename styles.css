@@ -1,50 +1,56 @@
+
+/* Importerar ett typsnitt från Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
+/* Grundläggande stilinställningar för hela sidan */
 body {
-  font-family:'Courier New', Courier, monospace;
-  font-weight: 400;
-  font-style: normal;
-  text-shadow: black 1px 1px;
-  color: white;
-  background: #f0f4f8;
-  display: flex;
-  justify-content: center;
+  font-family:'Courier New', Courier, monospace; /* Typsnitt för text */
+  font-weight: 400; /* Normal tjocklek */
+  font-style: normal; 
+  text-shadow: black 1px 1px; /* Svart skugga bakom texten */
+  color: white; /* Vit textfärg */
+  background: #f0f4f8; /* Ljus bakgrundsfärg */
+  display: flex; /* Flexbox för att centrera innehåll */
+  justify-content: center; 
   align-items: center;
-  height: 100vh;
+  height: 100vh; /* Full höjd av skärmen */
   margin: 0;
-  background-image: url("bg.jpg");
+  background-image: url("bg.jpg"); /* Bakgrundsbild */
   background-size: cover;
   background-repeat: no-repeat;
 }
 
+/* Stil för startsidan */
 #start {
   text-align: center;
   margin: auto;
   width: 85%;
 }
 
+/* Stil för quizdelen */
 #app {
-  background: linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
-   url("bg-quiz.jpg");
+  background: linear-gradient(rgba(255,255,255,0.15),rgba(255,255,255,0.15)), url("bg-quiz.jpg"); /* Bakrund med genomskinligt lager */
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lätt skugga runt boxen */
   max-width: 600px;
   width: 100%;
   text-align: center;
-  overflow-y: auto;
+  overflow-y: auto; /* Scroll om innehållet är för stort */
   max-height: 95vh;
 }
 
+/* Stil för rubriktext med kontur */
 #startText {
   -webkit-text-stroke: 10px black; /* width and color */
 
     paint-order: stroke fill;
 }
 
+/* Stil för alla knappar */
 button {
   font-family: "SUSE Mono", sans-serif;
   text-align: center;
@@ -58,6 +64,7 @@ button {
   transition: 0.3s;
 }
 
+/* Färgkoding för kategoriknappar */
 .category-btn.html {
   background-color: #f16529; /* HTML orange */
 }
@@ -70,6 +77,7 @@ button {
   background-color: #f7ab1e; /* JS gul */
 }
 
+/* Färgkoding för svårighetsknappar */
 #btn-easy {
   background-color: #0ba300;
 }
@@ -82,6 +90,7 @@ button {
   background-color: #a30000;
 }
 
+/* Hover-effekter för knappar */
 #btn-easy:hover,
 #btn-medium:hover,
 #btn-hard:hover {
@@ -108,6 +117,7 @@ background-color: #a30000;
   background-color: #ffa704;
 }
 
+/* Stil för svarsalternativ */
 .option {
   display: block;
   margin: 8px 0;
@@ -119,11 +129,13 @@ background-color: #a30000;
   transition: 0.3s;
 }
 
+/* Hover-effekt för svarsalternativ */
 .option:hover {
   background: #e0e0e0;
   color: black;
 }
 
+/* Stil för timer */
 .timer {
   font-weight: bold;
   margin: 10px 0;
@@ -133,6 +145,7 @@ background-color: #a30000;
   color: red;
 }
 
+/* Stil för resultatlista*/
 .correct {
   background: #47e13c !important;
   color: black;

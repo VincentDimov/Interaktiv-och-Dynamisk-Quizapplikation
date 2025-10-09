@@ -1,8 +1,9 @@
+// Hämta HTML-elementen från sidan
 const start = document.getElementById("start");
 const app = document.getElementById("app");
 const result = document.getElementById("result");
 
-// Quizdata
+// Quizdata organiserad i kategori
 const quizzes = {
   "HTML": [
     { question: "Vad står HTML för?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Madeup"], answer: "Hyper Text Markup Language" },
@@ -56,20 +57,21 @@ const quizzes = {
 
 
 // Variabler för funktioner
-let currentQuiz = [];
-let currentIndex = 0;
-let score = 0;
-let answers = [];
-let timer;
-let timeLeft = 10;
-let currentCategory = "";
-let difficulty = "Medel";
+let currentQuiz = []; //Håller aktuella frågor
+let currentIndex = 0; //Håller koll på vilken fråga vi är på
+let score = 0; //Poängräknare
+let answers = []; //Sparar användarens svar
+let timer; // Timer för varje fråga
+let timeLeft = 10; // Tid kvar för aktuell fråga
+let currentCategory = ""; // Vald kategori
+let difficulty = "Medel"; // Vald svårighetsgrad
 
-// Startvy
+// Funktioner som visar startsidan
 function showStart() {
-  start.style.display = "block";
-  app.style.display = "none";
-  result.style.display = "result";
+  start.style.display = "block"; // Visa startsidan
+  app.style.display = "none"; // Dölj quizdelen
+  result.style.display = "result"; // Dölj resultatsidan
+  // HTML-innehåll för startsidan
   start.innerHTML = `
     <h1 id="startText">Välkommen till vår Frontend Quiz!</h1>
     <p id="startText">          
@@ -81,11 +83,13 @@ function showStart() {
      `;
 }
 
-// Quizvy
+// Funktion som visar quizens kategori-val
 function showQuiz() {
-  start.style.display = "none";
-  app.style.display = "block";
+  start.style.display = "none"; // Dölj startsidan
+  app.style.display = "block"; // Visa quizdelen
+  // Hämta tidigare resultat från localStorage
   const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
+  // Visa kategori-knappar och tidigare resultat
   app.innerHTML = `
     <h1>Frontend Quiz</h1>
     <p>Välj en kategori:</p>
@@ -100,7 +104,8 @@ function showQuiz() {
 
 // Välj svårighetsnivå
 function chooseDifficulty(category) {
-  currentCategory = category;
+  currentCategory = category; // Spara vald kategori
+  // Visa svårighetsknappar
   app.innerHTML = `
     <h2>Välj svårighetsnivå för ${category}:</h2>
     <button id="btn-easy" onclick="startQuiz('Lätt')">Lätt (15 sek)</button>
@@ -111,25 +116,26 @@ function chooseDifficulty(category) {
 
 // Starta quiz
 function startQuiz(level) {
-  difficulty = level;
+  difficulty = level; // Spara vald svårighetsnivå
   currentQuiz = shuffleArray([...quizzes[currentCategory]]);
   currentIndex = 0;
   score = 0;
   answers = [];
 
-  showQuestion();
+  showQuestion(); // Visa första frågan
 }
 
 // Visa fråga
 function showQuestion() {
-  const q = currentQuiz[currentIndex];
-  if (!q) return;
+  const q = currentQuiz[currentIndex]; // Hämta aktuell fråga
+  if (!q) return; // Säkerställ att frågan finns
 
   // Sätt tid beroende på svårighetsnivå
   if (difficulty === "Lätt") timeLeft = 15;
   if (difficulty === "Medel") timeLeft = 10;
   if (difficulty === "Svår") timeLeft = 5;
 
+  // Visa frågan och timer
   app.innerHTML = `
     <h5>${currentCategory} (${difficulty}) - Fråga ${currentIndex + 1} av ${currentQuiz.length}</h5>
     <p>${q.question}</p>
@@ -137,13 +143,13 @@ function showQuestion() {
     <div id="options"></div>
   `;
 
-  // Skapa svarsalternativ
+  // Skapa svarsalternativ som klickbara element
   const optionsDiv = document.getElementById("options");
   q.options.forEach(opt => {
     const btn = document.createElement("div");
     btn.innerHTML = opt;
     btn.classList.add("option");
-    btn.onclick = () => selectAnswer(opt, btn);
+    btn.onclick = () => selectAnswer(opt, btn); //När användaren klickar på ett svar
     optionsDiv.appendChild(btn);
   });
 
@@ -160,7 +166,7 @@ function showQuestion() {
   };
   app.appendChild(nextBtn);
 
-  // Starta timer
+  // Starta nedräkning
   timer = setInterval(() => {
     timeLeft--;
     document.getElementById("time").textContent = timeLeft;
@@ -172,8 +178,9 @@ function showQuestion() {
   }, 1000);
 }
 
+// Funktion som hanterar användarens svar
 function selectAnswer(option, element, fromNext = false) {
-  clearInterval(timer);
+  clearInterval(timer); // Stoppa timern
 
   const q = currentQuiz[currentIndex];
 
@@ -226,7 +233,7 @@ function showResult() {
   let html = `<h1 style="color: #3149ff;">Resultat</h1>
     <p>Du fick <strong>${score}</strong> av <strong>${currentQuiz.length}</strong> rätt!</p>
     <h2>Rätta svar:</h2><ul style="text-align:left;">`;
-
+  // Visa varje fråga med användarens svar och rätt svar
   answers.forEach(a => {
   const isCorrect = a.yourAnswer === a.correct;
   const color = isCorrect ? "green" : "red";
@@ -250,20 +257,20 @@ function showResult() {
   localStorage.setItem("quizHistory", JSON.stringify(history));
 }
 
-// Radera historik
+// Funktion för att radera historik
 function resetHistory() {
   localStorage.removeItem("quizHistory");
-  showStart();
+  showStart(); // Visa startsidan igen efter rensning
 }
 
-// Blanda array
+// Blanda array slumpmässigt
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    const j = Math.floor(Math.random() * (i + 1)); // Välj en slumpmässig index
+    [arr[i], arr[j]] = [arr[j], arr[i]]; // Byt plats på elementen i och j
   }
-  return arr;
+  return arr; // Returnera den blandade arrayen
 }
 
-// Start
+// Funktion som körs när sidan laddas
 showStart();
