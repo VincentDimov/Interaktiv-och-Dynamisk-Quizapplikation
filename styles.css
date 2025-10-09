@@ -64,11 +64,7 @@ button {
   transition: 0.3s;
 }
 
-<<<<<<< HEAD
 /* Färgkoding för kategoriknappar */
-=======
-/* Kategori knapp styles */
->>>>>>> 19af0b689afa7708e01eea728127877337de8b88
 .category-btn.html {
   background-color: #f16529; /* HTML orange */
 }
